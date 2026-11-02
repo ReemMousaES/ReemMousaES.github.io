@@ -5,9 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Reem Mousa · Senior Android Developer</title>
 <meta name="description" content="Reem Mousa, Senior Android Developer. Shipped apps, open-source libraries and writing.">
+<meta property="og:title" content="Reem Mousa · Senior Android Developer">
+<meta property="og:description" content="Shipped Android apps, open-source libraries and writing.">
+<meta property="og:image" content="https://reemmousaes.github.io/assets/reem.jpg">
+<link rel="icon" href="assets/reem.jpg">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: one 760px reading column; a name block, then work grouped by kind (apps, libraries, writing, history). */
+/* Layout: one 800px reading column; photo + name block, then work grouped by kind (apps, libraries, writing, history). */
 :root {
   --bg: #f5f7f9;
   --surface: #ffffff;
@@ -15,39 +19,36 @@
   --muted: #56616e;
   --line: #dde3ea;
   --accent: #1d5b86;
+  --accent-2: #3ddc84;
   --accent-soft: #e3eef6;
   --code-bg: #eef2f6;
   --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
   --body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --ease: cubic-bezier(.2,.7,.2,1);
+  color-scheme: light;
 }
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
+  :root {
     --bg: #0f1419; --surface: #161d25; --fg: #e6ebf0; --muted: #98a4b1;
-    --line: #26303b; --accent: #82b8e0; --accent-soft: #1b2a37; --code-bg: #1b232c;
+    --line: #26303b; --accent: #82b8e0; --accent-2: #3ddc84; --accent-soft: #1b2a37; --code-bg: #1b232c;
     color-scheme: dark;
   }
 }
-:root[data-theme="dark"] {
-  --bg: #0f1419; --surface: #161d25; --fg: #e6ebf0; --muted: #98a4b1;
-  --line: #26303b; --accent: #82b8e0; --accent-soft: #1b2a37; --code-bg: #1b232c;
-  color-scheme: dark;
-}
 * { box-sizing: border-box; }
-html { color-scheme: light; }
-body { margin: 0; }
-img { max-width: 100%; }
+html { scroll-behavior: smooth; }
 body {
-  background: var(--bg); color: var(--fg);
+  margin: 0; background: var(--bg); color: var(--fg);
   font: 400 16px/1.6 var(--body);
   padding-left: max(16px, env(safe-area-inset-left, 0px));
   padding-right: max(16px, env(safe-area-inset-right, 0px));
 }
-main { max-width: 760px; margin: 0 auto; padding-block: 56px 72px; display: grid; gap: 56px; }
+img { max-width: 100%; display: block; }
+main { max-width: 800px; margin: 0 auto; padding-block: 56px 72px; display: grid; gap: 64px; }
 a { color: var(--accent); text-underline-offset: 3px; }
-a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+a:focus-visible, button:focus-visible, .shots:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
 h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0; }
-h1 { font-size: clamp(2.4rem, 7vw, 3.4rem); font-weight: 700; line-height: 1.05; letter-spacing: -0.02em; }
+h1 { font-size: clamp(2.4rem, 7vw, 3.6rem); font-weight: 700; line-height: 1.02; letter-spacing: -0.02em; }
 h2 {
   font: 500 0.78rem/1 var(--body); text-transform: uppercase; letter-spacing: 0.12em;
   color: var(--muted); padding-bottom: 12px; border-bottom: 1px solid var(--line);
@@ -57,25 +58,40 @@ p { margin: 0; }
 section { display: grid; gap: 20px; }
 
 /* Header */
-.intro { display: grid; gap: 18px; }
+.intro { display: grid; grid-template-columns: auto 1fr; gap: 20px 32px; align-items: center; }
+.avatar { position: relative; width: 132px; height: 132px; }
+.avatar::before {
+  content: ""; position: absolute; inset: -5px; border-radius: 50%;
+  background: conic-gradient(from 0deg, var(--accent), var(--accent-2), var(--accent));
+}
+.avatar img {
+  position: relative; width: 100%; height: 100%; object-fit: cover; border-radius: 50%;
+  border: 4px solid var(--bg);
+}
+.name { display: grid; gap: 8px; }
 .role { font: 500 1.05rem/1.4 var(--body); color: var(--accent); }
-.lede { font-size: 1.12rem; color: var(--fg); max-width: 62ch; }
-.contact { display: flex; flex-wrap: wrap; gap: 8px 22px; font-size: 0.95rem; color: var(--muted); }
+.intro-body { grid-column: 1 / -1; display: grid; gap: 18px; }
+.lede { font-size: 1.12rem; max-width: 62ch; }
+.contact { display: flex; flex-wrap: wrap; gap: 8px 22px; font-size: 0.95rem; color: var(--muted); align-items: center; }
 .contact a { font-weight: 500; }
 .email { font-family: var(--mono); font-size: 0.88rem; color: var(--fg); user-select: all; }
-.facts { display: flex; flex-wrap: wrap; gap: 10px; margin: 6px 0 0; padding: 0; list-style: none; }
+.facts { display: flex; flex-wrap: wrap; gap: 10px; margin: 0; padding: 0; list-style: none; }
 .facts li {
   font: 500 0.85rem/1 var(--mono); padding: 8px 12px; border-radius: 999px;
   background: var(--accent-soft); color: var(--fg);
 }
 
 /* Project entries */
-.work { display: grid; gap: 14px; }
+.work { display: grid; gap: 16px; }
 .project {
-  background: var(--surface); border: 1px solid var(--line); border-radius: 10px;
-  padding: 22px 22px 20px; display: grid; gap: 12px; min-width: 0;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+  padding: 22px 22px 20px; display: grid; gap: 14px; min-width: 0;
+  transition: border-color .25s, transform .25s var(--ease), box-shadow .25s;
 }
-.project-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 6px 16px; }
+.project:hover { border-color: color-mix(in srgb, var(--accent) 45%, var(--line)); }
+.project-head { display: flex; align-items: center; gap: 14px; }
+.project-head .titles { display: grid; gap: 2px; min-width: 0; }
+.app-icon { width: 52px; height: 52px; border-radius: 13px; flex: none; border: 1px solid var(--line); }
 .meta { font-size: 0.9rem; color: var(--muted); }
 .project ul { margin: 0; padding-left: 1.1em; display: grid; gap: 6px; }
 .project li::marker { color: var(--accent); }
@@ -86,6 +102,31 @@ section { display: grid; gap: 20px; }
 }
 .links { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 0.93rem; font-weight: 500; }
 .note { font-size: 0.88rem; color: var(--muted); font-style: italic; }
+
+/* Screenshot strip */
+.shots {
+  display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory;
+  padding: 4px 2px 12px; margin: 0 -2px; scrollbar-width: thin;
+}
+.shots img {
+  flex: none; width: 150px; aspect-ratio: 9 / 16; object-fit: cover;
+  border-radius: 14px; border: 1px solid var(--line); scroll-snap-align: start;
+  background: var(--code-bg);
+  transition: transform .3s var(--ease), box-shadow .3s;
+}
+.shots img:hover { transform: translateY(-4px) rotate(-1deg); box-shadow: 0 10px 24px -12px rgba(0,0,0,.35); }
+
+/* Upload queue demo */
+.queue {
+  display: grid; gap: 10px; background: var(--code-bg); border-radius: 8px; padding: 14px;
+  font: 400 0.8rem/1.2 var(--mono);
+}
+.job { display: grid; grid-template-columns: 7.5rem 1fr 1.2rem; align-items: center; gap: 12px; }
+.job .file { color: var(--fg); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.bar { height: 6px; border-radius: 3px; background: var(--line); overflow: hidden; }
+.bar i { display: block; height: 100%; width: 100%; background: var(--accent); transform-origin: left; }
+.job .ok { color: var(--accent-2); font-weight: 600; text-align: center; }
+.queue-caption { font-family: var(--body); font-size: 0.82rem; color: var(--muted); }
 
 /* Install snippet */
 .snippet {
@@ -100,7 +141,7 @@ section { display: grid; gap: 20px; }
 .snippet button:hover { border-color: var(--accent); }
 
 /* Timeline */
-.timeline { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+.timeline { list-style: none; margin: 0; padding: 0; display: grid; }
 .timeline li {
   display: grid; grid-template-columns: 9.5rem 1fr; gap: 4px 20px;
   padding: 14px 0; border-bottom: 1px solid var(--line);
@@ -118,33 +159,81 @@ section { display: grid; gap: 20px; }
 footer { font-size: 0.85rem; color: var(--muted); border-top: 1px solid var(--line); padding-top: 18px; }
 
 @media (max-width: 560px) {
-  main { padding-block: 36px 56px; gap: 44px; }
+  main { padding-block: 36px 56px; gap: 48px; }
+  .intro { grid-template-columns: 1fr; }
+  .avatar { width: 104px; height: 104px; }
   .project { padding: 18px 16px; }
+  .shots img { width: 128px; }
   .timeline li, .skills div { grid-template-columns: 1fr; }
+  .job { grid-template-columns: 6rem 1fr 1.2rem; }
 }
+
+/* Motion: everything above is the resting state; animations only run when the viewer allows motion. */
 @media (prefers-reduced-motion: no-preference) {
-  .snippet button { transition: border-color .15s; }
+  @keyframes rise { from { opacity: 0; transform: translateY(14px); } }
+  @keyframes spin { to { transform: rotate(1turn); } }
+  @keyframes fill { 0% { transform: scaleX(0); } 100% { transform: scaleX(1); } }
+  @keyframes pop { 0%, 80% { opacity: 0; transform: scale(.4); } 100% { opacity: 1; transform: none; } }
+
+  .avatar::before { animation: spin 8s linear infinite; }
+  .intro > *, .intro-body > * { animation: rise .7s var(--ease) both; }
+  .name { animation-delay: .08s !important; }
+  .intro-body > :nth-child(1) { animation-delay: .16s; }
+  .intro-body > :nth-child(2) { animation-delay: .24s; }
+  .intro-body > :nth-child(3) { animation-delay: .32s; }
+  .facts li { animation: rise .5s var(--ease) both; }
+  .facts li:nth-child(2) { animation-delay: .38s; } .facts li:nth-child(3) { animation-delay: .44s; }
+  .facts li:nth-child(4) { animation-delay: .50s; } .facts li:nth-child(5) { animation-delay: .56s; }
+
+  .project:hover { transform: translateY(-2px); box-shadow: 0 12px 28px -18px rgba(0,0,0,.35); }
+
+  /* Upload queue: one file at a time, progress in 10% steps, like the library itself. */
+  .job .bar i { animation: fill 9s steps(10, end) infinite; }
+  .job .ok { animation: pop 9s infinite; }
+  .job:nth-child(1) .bar i { animation-name: q1; } .job:nth-child(1) .ok { animation-name: c1; }
+  .job:nth-child(2) .bar i { animation-name: q2; } .job:nth-child(2) .ok { animation-name: c2; }
+  .job:nth-child(3) .bar i { animation-name: q3; } .job:nth-child(3) .ok { animation-name: c3; }
+  .job .bar i { animation-timing-function: linear; }
+  @keyframes q1 { 0% { transform: scaleX(0); } 25%, 100% { transform: scaleX(1); } }
+  @keyframes q2 { 0%, 28% { transform: scaleX(0); } 53%, 100% { transform: scaleX(1); } }
+  @keyframes q3 { 0%, 56% { transform: scaleX(0); } 81%, 100% { transform: scaleX(1); } }
+  @keyframes c1 { 0%, 24% { opacity: 0; } 27%, 100% { opacity: 1; } }
+  @keyframes c2 { 0%, 52% { opacity: 0; } 55%, 100% { opacity: 1; } }
+  @keyframes c3 { 0%, 80% { opacity: 0; } 83%, 100% { opacity: 1; } }
+
+  /* Scroll reveal where the browser supports scroll-driven animations; content stays visible elsewhere. */
+  @supports (animation-timeline: view()) {
+    section > h2, .project, .timeline li {
+      animation: rise linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 40%;
+    }
+  }
 }
 </style>
 </head>
 <body>
-
 <main>
   <header class="intro">
-    <h1>Reem Mousa</h1>
-    <p class="role">Senior Android Developer · Cairo, Egypt</p>
-    <p class="lede">I build native Android apps in Kotlin and own them end to end, from architecture to Play Store release. My work centers on audio streaming, background transfer and talking to hardware over USB and Bluetooth.</p>
-    <ul class="facts" aria-label="At a glance">
-      <li>7+ years Android</li>
-      <li>Kotlin · Java</li>
-      <li>Media3 · Android Auto</li>
-      <li>WorkManager · Room</li>
-      <li>USB PTP · BLE</li>
-    </ul>
-    <div class="contact">
-      <span class="email">reemhazzaamosa95@gmail.com</span>
-      <a href="https://www.linkedin.com/in/reem-hazzaa95/">LinkedIn</a>
-      <a href="https://github.com/ReemMousaES">GitHub</a>
+    <div class="avatar"><img src="assets/reem.jpg" alt="Reem Mousa" width="132" height="132"></div>
+    <div class="name">
+      <h1>Reem Mousa</h1>
+      <p class="role">Senior Android Developer · Cairo, Egypt</p>
+    </div>
+    <div class="intro-body">
+      <p class="lede">I build native Android apps in Kotlin and own them end to end, from architecture to Play Store release. My work centers on audio streaming, background transfer and talking to hardware over USB and Bluetooth.</p>
+      <ul class="facts" aria-label="At a glance">
+        <li>7+ years Android</li>
+        <li>Kotlin · Java</li>
+        <li>Media3 · Android Auto</li>
+        <li>WorkManager · Room</li>
+        <li>USB PTP · BLE</li>
+      </ul>
+      <div class="contact">
+        <span class="email">reemhazzaamosa95@gmail.com</span>
+        <a href="https://www.linkedin.com/in/reem-hazzaa95/">LinkedIn</a>
+        <a href="https://github.com/ReemMousaES">GitHub</a>
+      </div>
     </div>
   </header>
 
@@ -153,8 +242,14 @@ footer { font-size: 0.85rem; color: var(--muted); border-top: 1px solid var(--li
     <div class="work">
       <article class="project">
         <div class="project-head">
-          <h3>Anaphora</h3>
-          <span class="meta">Audio streaming · sole Android engineer</span>
+          <img class="app-icon" src="assets/anaphora-icon.webp" alt="" width="52" height="52">
+          <div class="titles"><h3>Anaphora</h3><span class="meta">Audio streaming · sole Android engineer</span></div>
+        </div>
+        <div class="shots" tabindex="0" aria-label="Anaphora screenshots">
+          <img src="assets/anaphora-1.webp" alt="Anaphora welcome screen" loading="lazy" width="150" height="267">
+          <img src="assets/anaphora-2.webp" alt="Anaphora screenshot" loading="lazy" width="150" height="267">
+          <img src="assets/anaphora-3.webp" alt="Anaphora screenshot" loading="lazy" width="150" height="267">
+          <img src="assets/anaphora-4.webp" alt="Anaphora screenshot" loading="lazy" width="150" height="267">
         </div>
         <ul>
           <li>Built from scratch: a full music-style player with offline mode and a download manager that runs parallel downloads with pause and resume.</li>
@@ -167,21 +262,16 @@ footer { font-size: 0.85rem; color: var(--muted); border-top: 1px solid var(--li
 
       <article class="project">
         <div class="project-head">
-          <h3>PhotoFlare</h3>
-          <span class="meta">DSLR event photography · lead developer</span>
+          <img class="app-icon" src="assets/onecommunity-icon.webp" alt="" width="52" height="52">
+          <div class="titles"><h3>New Giza OneCommunity and Sales</h3><span class="meta">Two Salesforce apps · since Nov 2025</span></div>
         </div>
-        <ul>
-          <li>Connects to a DSLR over USB and pulls photos during live events. I rebuilt the image pipeline on coroutine channels so 10+ FPS bursts run without native crashes or low-memory kills.</li>
-          <li>Replaced long-running services with a Room and WorkManager upload queue, then split the camera and upload layers into reusable libraries (below).</li>
-        </ul>
-        <div class="tags"><span>USB PTP</span><span>Coroutines</span><span>Channels</span><span>WorkManager</span><span>Room</span></div>
-        <p class="note">Distributed privately to event operators, so there is no public store listing.</p>
-      </article>
-
-      <article class="project">
-        <div class="project-head">
-          <h3>New Giza OneCommunity and Sales</h3>
-          <span class="meta">Two Salesforce apps · since Nov 2025</span>
+        <div class="shots" tabindex="0" aria-label="New Giza app screenshots">
+          <img src="assets/onecommunity-1.webp" alt="OneCommunity screenshot" loading="lazy" width="150" height="267">
+          <img src="assets/onecommunity-2.webp" alt="OneCommunity screenshot" loading="lazy" width="150" height="267">
+          <img src="assets/sales-1.webp" alt="New Giza Sales screenshot" loading="lazy" width="150" height="267">
+          <img src="assets/sales-2.webp" alt="New Giza Sales screenshot" loading="lazy" width="150" height="267">
+          <img src="assets/onecommunity-3.webp" alt="OneCommunity screenshot" loading="lazy" width="150" height="267">
+          <img src="assets/sales-3.webp" alt="New Giza Sales screenshot" loading="lazy" width="150" height="267">
         </div>
         <ul>
           <li>Residents and buyers use them for payments, bookings, guest invitations and QR gate access.</li>
@@ -193,6 +283,18 @@ footer { font-size: 0.85rem; color: var(--muted); border-top: 1px solid var(--li
           <a href="https://play.google.com/store/apps/details?id=com.newgiza.NGSC">Sales on Google Play</a>
         </div>
       </article>
+
+      <article class="project">
+        <div class="project-head">
+          <div class="titles"><h3>PhotoFlare</h3><span class="meta">DSLR event photography · lead developer</span></div>
+        </div>
+        <ul>
+          <li>Connects to a DSLR over USB and pulls photos during live events. I rebuilt the image pipeline on coroutine channels so 10+ FPS bursts run without native crashes or low-memory kills.</li>
+          <li>Replaced long-running services with a Room and WorkManager upload queue, then split the camera and upload layers into reusable libraries (below).</li>
+        </ul>
+        <div class="tags"><span>USB PTP</span><span>Coroutines</span><span>Channels</span><span>WorkManager</span><span>Room</span></div>
+        <p class="note">Distributed privately to event operators, so there is no public store listing.</p>
+      </article>
     </div>
   </section>
 
@@ -201,26 +303,34 @@ footer { font-size: 0.85rem; color: var(--muted); border-top: 1px solid var(--li
     <div class="work">
       <article class="project">
         <div class="project-head">
-          <h3>esUpload</h3>
-          <span class="meta">v1.3.0 · JitPack</span>
+          <div class="titles"><h3>esUpload</h3><span class="meta">v1.3.0 · JitPack</span></div>
         </div>
         <p>Queues file uploads and sends them one at a time in the background with WorkManager. Uploads survive app restarts, retry on failure and report progress. Covered by 33 unit tests.</p>
+        <div class="queue" aria-hidden="true">
+          <div class="job"><span class="file">event_0142.jpg</span><span class="bar"><i></i></span><span class="ok">✓</span></div>
+          <div class="job"><span class="file">event_0143.jpg</span><span class="bar"><i></i></span><span class="ok">✓</span></div>
+          <div class="job"><span class="file">event_0144.jpg</span><span class="bar"><i></i></span><span class="ok">✓</span></div>
+          <span class="queue-caption">Sequential queue, progress reported in 10% steps</span>
+        </div>
         <div class="snippet">
-          <code id="install">implementation("com.github.ReemMousaES:esUpload:1.3.0")</code>
-          <button type="button" id="copy-install">Copy</button>
+          <code>implementation("com.github.ReemMousaES:esUpload:1.3.0")</code>
+          <button type="button">Copy</button>
         </div>
         <div class="tags"><span>WorkManager</span><span>Room</span><span>OkHttp</span><span>Hilt</span><span>API 24+</span></div>
-        <div class="links"><a href="https://github.com/ReemMousaES/esUpload">View on GitHub</a></div>
+        <div class="links"><a href="https://github.com/ReemMousaES/esUpload">View on GitHub</a><a href="https://jitpack.io/#ReemMousaES/esUpload">View on JitPack</a></div>
       </article>
 
       <article class="project">
         <div class="project-head">
-          <h3>es-ptp-camera</h3>
-          <span class="meta">Android library</span>
+          <div class="titles"><h3>es-ptp-camera</h3><span class="meta">v1.0.3 · JitPack</span></div>
         </div>
         <p>Controls DSLR cameras from Android over USB using the Picture Transfer Protocol: connect, trigger and download photos. Extracted from PhotoFlare.</p>
+        <div class="snippet">
+          <code>implementation("com.github.ReemMousaES:es-ptp-camera:v1.0.3")</code>
+          <button type="button">Copy</button>
+        </div>
         <div class="tags"><span>USB Host</span><span>PTP</span><span>Kotlin</span></div>
-        <div class="links"><a href="https://github.com/ReemMousaES/es-ptp-camera">View on GitHub</a></div>
+        <div class="links"><a href="https://github.com/ReemMousaES/es-ptp-camera">View on GitHub</a><a href="https://jitpack.io/#ReemMousaES/es-ptp-camera">View on JitPack</a></div>
       </article>
     </div>
   </section>
@@ -262,19 +372,20 @@ footer { font-size: 0.85rem; color: var(--muted); border-top: 1px solid var(--li
 </main>
 
 <script>
-document.getElementById('copy-install').addEventListener('click', function () {
-  var btn = this, code = document.getElementById('install');
-  function selectIt() {
-    var r = document.createRange(); r.selectNodeContents(code);
-    var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
-    btn.textContent = 'Selected';
-  }
-  try {
-    navigator.clipboard.writeText(code.textContent).then(function () { btn.textContent = 'Copied'; }, selectIt);
-  } catch (e) { selectIt(); }
-  setTimeout(function () { btn.textContent = 'Copy'; }, 2000);
+document.querySelectorAll('.snippet button').forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    var code = btn.parentElement.querySelector('code');
+    function selectIt() {
+      var r = document.createRange(); r.selectNodeContents(code);
+      var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
+      btn.textContent = 'Selected';
+    }
+    try {
+      navigator.clipboard.writeText(code.textContent).then(function () { btn.textContent = 'Copied'; }, selectIt);
+    } catch (e) { selectIt(); }
+    setTimeout(function () { btn.textContent = 'Copy'; }, 2000);
+  });
 });
 </script>
-
 </body>
 </html>
