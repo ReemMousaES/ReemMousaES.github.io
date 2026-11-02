@@ -108,13 +108,13 @@ section { display: grid; gap: 20px; }
   display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory;
   padding: 4px 2px 12px; margin: 0 -2px; scrollbar-width: thin;
 }
-.shots img {
+.shots img, .shots video {
   flex: none; width: 150px; aspect-ratio: 9 / 16; object-fit: cover;
   border-radius: 14px; border: 1px solid var(--line); scroll-snap-align: start;
   background: var(--code-bg);
   transition: transform .3s var(--ease), box-shadow .3s;
 }
-.shots img:hover { transform: translateY(-4px) rotate(-1deg); box-shadow: 0 10px 24px -12px rgba(0,0,0,.35); }
+.shots img:hover, .shots video:hover { transform: translateY(-4px) rotate(-1deg); box-shadow: 0 10px 24px -12px rgba(0,0,0,.35); }
 
 /* Upload queue demo */
 .queue {
@@ -227,7 +227,7 @@ footer { font-size: 0.85rem; color: var(--muted); border-top: 1px solid var(--li
   .intro { grid-template-columns: 1fr; }
   .avatar { width: 104px; height: 104px; }
   .project { padding: 18px 16px; }
-  .shots img { width: 128px; }
+  .shots img, .shots video { width: 128px; }
   .timeline li, .skills div { grid-template-columns: 1fr; }
   .job { grid-template-columns: 6rem 1fr 1.2rem; }
 }
@@ -443,12 +443,17 @@ footer { font-size: 0.85rem; color: var(--muted); border-top: 1px solid var(--li
         <div class="project-head">
           <div class="titles"><h3>es-ptp-camera</h3><span class="meta">v1.0.3 · JitPack</span></div>
         </div>
-        <p>Controls DSLR cameras from Android over USB using the Picture Transfer Protocol: connect, trigger and download photos. Extracted from PhotoFlare.</p>
+        <div class="shots" tabindex="0" aria-label="es-ptp-camera sample app">
+          <video src="assets/ptp-liveview.mp4" poster="assets/ptp-liveview.jpg" autoplay muted loop playsinline width="150" height="334" aria-label="Sample app streaming live view from a DSLR"></video>
+          <img src="assets/ptp-1.jpg" alt="Sample app showing live view and a grid of photos captured on the camera" loading="lazy" width="150" height="334">
+        </div>
+        <p>Controls Canon EOS and Nikon DSLRs from Android over USB using the Picture Transfer Protocol: live view, capture, camera settings such as ISO, aperture and shutter speed, and automatic photo download. Extracted from PhotoFlare.</p>
+        <p class="note">Recorded from the library's open-source sample app.</p>
         <div class="snippet">
           <code>implementation("com.github.ReemMousaES:es-ptp-camera:v1.0.3")</code>
           <button type="button">Copy</button>
         </div>
-        <div class="tags"><span>USB Host</span><span>PTP</span><span>Kotlin</span></div>
+        <div class="tags"><span>USB Host</span><span>PTP</span><span>Live view</span><span>Canon EOS</span><span>Nikon</span><span>Kotlin</span></div>
         <div class="links"><a href="https://github.com/ReemMousaES/es-ptp-camera">View on GitHub</a><a href="https://jitpack.io/#ReemMousaES/es-ptp-camera">View on JitPack</a></div>
       </article>
     </div>
@@ -522,6 +527,10 @@ document.querySelectorAll('.snippet button').forEach(function (btn) {
     setTimeout(function () { btn.textContent = 'Copy'; }, 2000);
   });
 });
+// Videos autoplay like the CSS animations, so they also respect reduced motion.
+if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  document.querySelectorAll('video[autoplay]').forEach(function (v) { v.pause(); v.removeAttribute('autoplay'); v.controls = true; });
+}
 </script>
 </body>
 </html>
