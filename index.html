@@ -128,6 +128,70 @@ section { display: grid; gap: 20px; }
 .job .ok { color: var(--accent-2); font-weight: 600; text-align: center; }
 .queue-caption { font-family: var(--body); font-size: 0.82rem; color: var(--muted); }
 
+/* PhotoFlare illustrations: drawn in CSS, navy brand colour, landscape tablet frames. */
+.mocks {
+  display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory;
+  padding: 4px 2px 12px; margin: 0 -2px; scrollbar-width: thin;
+}
+.mock { flex: none; width: 300px; margin: 0; display: grid; gap: 8px; align-content: start; scroll-snap-align: start; }
+.mock figcaption { font-size: 0.82rem; color: var(--muted); }
+.device { background: #0b1222; border-radius: 14px; padding: 7px; box-shadow: 0 10px 24px -16px rgba(0,0,0,.5); }
+.scr {
+  --pf: #16254a; --pf-2: #2c4a8a; --pf-bg: #eef1f7; --pf-line: #d3dae8;
+  aspect-ratio: 16 / 10; border-radius: 8px; overflow: hidden; background: var(--pf-bg);
+  font: 500 8px/1.2 var(--body); color: #1c2433; display: grid;
+}
+.pf-bar { background: var(--pf); color: #fff; display: flex; justify-content: space-between; align-items: center; padding: 0 8px; font-weight: 600; }
+.pf-bar .live { color: #9fe3b7; font-weight: 500; }
+.ph { border-radius: 3px; background: var(--g); position: relative; overflow: hidden; }
+.ph::after { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 30% 35%, rgba(255,255,255,.45) 0 6%, transparent 7%), radial-gradient(circle at 70% 25%, rgba(255,255,255,.3) 0 4%, transparent 5%), radial-gradient(ellipse at 50% 110%, rgba(0,0,0,.35) 0 35%, transparent 36%); }
+.g1 { --g: linear-gradient(135deg, #f6a35c, #c4456b); }
+.g2 { --g: linear-gradient(135deg, #6fb1d8, #34508f); }
+.g3 { --g: linear-gradient(135deg, #f4d47a, #d9822b); }
+.g4 { --g: linear-gradient(135deg, #b48ad6, #5b3f8f); }
+.g5 { --g: linear-gradient(135deg, #7fd1b0, #2d7a6a); }
+
+/* 1. Camera screen: big latest photo, received photos on the right, overlays along the bottom. */
+.dslr { grid-template-columns: 1fr 24%; grid-template-rows: 16px minmax(0, 1fr) 22%; gap: 5px; padding-bottom: 5px; }
+.dslr .pf-bar { grid-column: 1 / -1; }
+.dslr .hero { grid-column: 1; grid-row: 2; margin-left: 5px; }
+.hero .file { position: absolute; left: 5px; bottom: 4px; z-index: 1; color: #fff; font-family: var(--mono); font-size: 7px; }
+.hero .scroll { position: absolute; right: 3px; top: 8%; width: 3px; height: 28%; border-radius: 2px; background: rgba(255,255,255,.75); z-index: 1; }
+.side { grid-column: 2; grid-row: 2 / 4; display: flex; flex-direction: column; gap: 4px; margin-right: 5px; min-height: 0; }
+.side .lbl, .strip .lbl { font-size: 7px; color: #5a6578; }
+.received { flex: 1; display: grid; gap: 4px; grid-auto-rows: 1fr; min-height: 0; overflow: hidden; }
+.pf-btn { background: var(--pf); color: #fff; border-radius: 4px; text-align: center; padding: 4px 0; font-weight: 600; }
+.strip { grid-column: 1; grid-row: 3; margin-left: 5px; display: grid; grid-template-rows: auto 1fr; gap: 2px; min-height: 0; }
+.overlays { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; min-height: 0; }
+.ov { border-radius: 3px; border: 3px solid var(--c); background: repeating-conic-gradient(#fff 0 25%, #dfe4ee 0 50%) 0 0 / 6px 6px; position: relative; }
+.ov::after { content: attr(data-t); position: absolute; left: 0; right: 0; bottom: -1px; text-align: center; font-size: 5px; color: #fff; background: var(--c); }
+.ov.on { outline: 1.5px solid var(--pf-2); outline-offset: 1px; }
+
+/* 2. Share screen: chosen photos on the left, guest phone numbers and emails on the right. */
+.share { grid-template-rows: 16px minmax(0, 1fr); }
+.share-body { display: grid; grid-template-columns: 40% 1fr; gap: 8px; padding: 8px; min-height: 0; }
+.picked { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; align-content: start; }
+.picked .ph { aspect-ratio: 4 / 3; }
+.picked .ph::before { content: "✓"; position: absolute; top: 2px; right: 2px; z-index: 1; width: 9px; height: 9px; border-radius: 50%; background: var(--pf-2); color: #fff; font-size: 6px; line-height: 9px; text-align: center; }
+.form { display: flex; flex-direction: column; gap: 5px; }
+.field { background: #fff; border: 1px solid var(--pf-line); border-radius: 4px; padding: 4px 5px; display: flex; justify-content: space-between; color: #8a94a6; }
+.field b { color: var(--pf-2); font-weight: 600; }
+.chips { display: flex; flex-wrap: wrap; gap: 3px; }
+.chip { background: #dfe6f5; color: var(--pf); border-radius: 8px; padding: 2px 5px; font-family: var(--mono); font-size: 6.5px; }
+.form .pf-btn { margin-top: auto; align-self: flex-end; padding: 4px 16px; }
+
+/* 3. Upload queue: one photo at a time, with progress. */
+.upq { grid-template-rows: 16px minmax(0, 1fr); }
+.rows { display: grid; gap: 4px; padding: 6px 8px; align-content: start; min-height: 0; overflow: hidden; }
+.row { display: grid; grid-template-columns: 24px 1fr 30px; gap: 7px; align-items: center; background: #fff; border: 1px solid var(--pf-line); border-radius: 4px; padding: 3px 4px; }
+.row .ph { aspect-ratio: 4 / 3; }
+.row .who { display: grid; gap: 3px; }
+.row .who span { color: #5a6578; font-size: 7px; }
+.row .bar { height: 4px; background: var(--pf-line); }
+.row .bar i { background: var(--pf-2); }
+.row .st { text-align: right; font-size: 7px; color: #5a6578; }
+.row .st b { color: #1f9d55; font-weight: 600; }
+
 /* Install snippet */
 .snippet {
   display: flex; align-items: center; gap: 10px; min-width: 0;
@@ -200,6 +264,16 @@ footer { font-size: 0.85rem; color: var(--muted); border-top: 1px solid var(--li
   @keyframes c1 { 0%, 24% { opacity: 0; } 27%, 100% { opacity: 1; } }
   @keyframes c2 { 0%, 52% { opacity: 0; } 55%, 100% { opacity: 1; } }
   @keyframes c3 { 0%, 80% { opacity: 0; } 83%, 100% { opacity: 1; } }
+
+  /* PhotoFlare: a new photo lands at the top of the received list and in the big view; the queue uploads in order. */
+  @keyframes land { 0%, 15% { opacity: 0; transform: translateY(-40%) scale(.8); } 25%, 100% { opacity: 1; transform: none; } }
+  @keyframes swap { 0%, 18% { opacity: 0; } 28%, 100% { opacity: 1; } }
+  .received .ph:first-child { animation: land 6s var(--ease) infinite; }
+  .hero .next { position: absolute; inset: 0; animation: swap 6s ease infinite; }
+  .row .bar i { animation: fill 9s linear infinite; }
+  .row:nth-child(1) .bar i { animation-name: q1; } .row:nth-child(1) .st b { animation: c1 9s infinite; }
+  .row:nth-child(2) .bar i { animation-name: q2; } .row:nth-child(2) .st b { animation: c2 9s infinite; }
+  .row:nth-child(3) .bar i { animation-name: q3; } .row:nth-child(3) .st b { animation: c3 9s infinite; }
 
   /* Scroll reveal where the browser supports scroll-driven animations; content stays visible elsewhere. */
   @supports (animation-timeline: view()) {
@@ -288,6 +362,51 @@ footer { font-size: 0.85rem; color: var(--muted); border-top: 1px solid var(--li
         <div class="project-head">
           <div class="titles"><h3>PhotoFlare</h3><span class="meta">DSLR event photography · lead developer</span></div>
         </div>
+        <div class="mocks" tabindex="0" aria-label="PhotoFlare illustrations">
+          <figure class="mock">
+            <div class="device"><div class="scr dslr" role="img" aria-label="Illustration of the camera screen: the latest photo fills most of the screen, received photos are listed on the right with a Share button under them, and overlays run along the bottom">
+              <div class="pf-bar"><span>PhotoFlare · Event</span><span class="live">● Camera connected</span></div>
+              <div class="hero ph g2"><div class="next ph g1"></div><span class="file">IMG_0142.JPG</span><span class="scroll"></span></div>
+              <div class="side">
+                <span class="lbl">From camera</span>
+                <div class="received"><div class="ph g1"></div><div class="ph g2"></div><div class="ph g3"></div><div class="ph g4"></div></div>
+                <div class="pf-btn">Share</div>
+              </div>
+              <div class="strip">
+                <span class="lbl">Event overlays</span>
+                <div class="overlays"><div class="ov on" style="--c:#16254a" data-t="Gala"></div><div class="ov" style="--c:#b8862b" data-t="Gold"></div><div class="ov" style="--c:#c4456b" data-t="Rose"></div><div class="ov" style="--c:#2d7a6a" data-t="Green"></div><div class="ov" style="--c:#5b3f8f" data-t="Night"></div></div>
+              </div>
+            </div></div>
+            <figcaption>Camera screen: photos arrive from the DSLR over USB.</figcaption>
+          </figure>
+          <figure class="mock">
+            <div class="device"><div class="scr share" role="img" aria-label="Illustration of the share screen: chosen photos on the left, guest phone numbers and emails on the right, and an OK button">
+              <div class="pf-bar"><span>← Share 3 photos</span></div>
+              <div class="share-body">
+                <div class="picked"><div class="ph g1"></div><div class="ph g2"></div><div class="ph g3"></div></div>
+                <div class="form">
+                  <div class="field"><span>Guest phone number</span><b>+ Add</b></div>
+                  <div class="field"><span>Guest email</span><b>+ Add</b></div>
+                  <div class="chips"><span class="chip">+20 100 000 0001</span><span class="chip">guest@example.com</span><span class="chip">+20 100 000 0002</span></div>
+                  <div class="pf-btn">OK</div>
+                </div>
+              </div>
+            </div></div>
+            <figcaption>Share screen: enter guests' phone numbers or emails.</figcaption>
+          </figure>
+          <figure class="mock">
+            <div class="device"><div class="scr upq" role="img" aria-label="Illustration of the upload queue: photos upload one at a time, each with a progress bar">
+              <div class="pf-bar"><span>Upload queue</span><span class="live">Online</span></div>
+              <div class="rows">
+                <div class="row"><div class="ph g1"></div><div class="who">IMG_0142<span>to 3 guests</span><div class="bar"><i></i></div></div><div class="st"><b>Sent</b></div></div>
+                <div class="row"><div class="ph g2"></div><div class="who">IMG_0141<span>to 2 guests</span><div class="bar"><i></i></div></div><div class="st"><b>Sent</b></div></div>
+                <div class="row"><div class="ph g3"></div><div class="who">IMG_0140<span>to 1 guest</span><div class="bar"><i></i></div></div><div class="st"><b>Sent</b></div></div>
+              </div>
+            </div></div>
+            <figcaption>Upload queue: one photo at a time, with progress.</figcaption>
+          </figure>
+        </div>
+        <p class="note">Illustrations to explain the idea, not the actual app screens.</p>
         <ul>
           <li>Connects to a DSLR over USB and pulls photos during live events. I rebuilt the image pipeline on coroutine channels so 10+ FPS bursts run without native crashes or low-memory kills.</li>
           <li>Replaced long-running services with a Room and WorkManager upload queue, then split the camera and upload layers into reusable libraries (below).</li>
