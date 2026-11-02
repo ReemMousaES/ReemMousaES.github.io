@@ -335,6 +335,22 @@ footer { font-size: 0.85rem; color: var(--muted); border-top: 1px solid var(--li
     </div>
   </section>
 
+  <section aria-labelledby="ai">
+    <h2 id="ai">How I work with AI</h2>
+    <div class="work">
+      <article class="project">
+        <p>I use Claude Code every day as a pair programmer. It drafts code and tests. I make the architecture calls, review every diff and test on real devices before anything merges.</p>
+        <ul>
+          <li><strong>Anaphora modernization in 13 days.</strong> Mapped the playback layer with the agent, wrote a phased plan, then shipped it ticket by ticket: Media3 MediaController, Android Auto fixes, real Room migrations, and the move to AGP 9 and Kotlin 2.4. Released as v4.2.0.</li>
+          <li><strong>16 KB page-size migration.</strong> Used AI agents to prepare apps for Android 15's 16 KB memory pages, saving about 94% of the expected time. I wrote up the method on LinkedIn.</li>
+          <li><strong>Team AI skill library.</strong> Contributed Android agent skills, prompts and an AI-responsible pull request template to Extreme Solution's shared library, so every project uses the same reviewed workflows.</li>
+          <li><strong>Project setup for agents.</strong> My repos carry CLAUDE.md and AGENTS.md files with build commands, architecture notes and guardrails, so any agent starts with the right context.</li>
+        </ul>
+        <div class="tags"><span>Claude Code</span><span>Agent skills</span><span>MCP</span><span>CLAUDE.md</span><span>AGENTS.md</span></div>
+      </article>
+    </div>
+  </section>
+
   <section aria-labelledby="writing">
     <h2 id="writing">Writing</h2>
     <div class="work">
@@ -364,6 +380,7 @@ footer { font-size: 0.85rem; color: var(--muted); border-top: 1px solid var(--li
       <div><dt>Core</dt><dd>Kotlin, Java, Coroutines, Flow, MVVM, Clean Architecture, Hilt, Jetpack Compose</dd></div>
       <div><dt>Android</dt><dd>Media3, Android Auto, WorkManager, Room, Paging 3, DataStore, Material 3, Firebase Cloud Messaging (push notifications)</dd></div>
       <div><dt>Quality</dt><dd>JUnit, MockK, Turbine, Espresso, Git, GitHub Actions, Firebase Crashlytics</dd></div>
+      <div><dt>AI tooling</dt><dd>Claude Code (agent skills, MCP, CLAUDE.md / AGENTS.md), with every AI change reviewed and tested</dd></div>
       <div><dt>Integrations</dt><dd>REST APIs (Retrofit, OkHttp), Salesforce Mobile SDK, Auth0, USB PTP, BLE, AOSP</dd></div>
     </dl>
   </section>
