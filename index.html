@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Reem Mousa · Senior Android Developer</title>
+<meta name="description" content="Reem Mousa, Senior Android Developer. Shipped apps, open-source libraries and writing.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 760px reading column; a name block, then work grouped by kind (apps, libraries, writing, history). */
+:root {
+  --bg: #f5f7f9;
+  --surface: #ffffff;
+  --fg: #141a21;
+  --muted: #56616e;
+  --line: #dde3ea;
+  --accent: #1d5b86;
+  --accent-soft: #e3eef6;
+  --code-bg: #eef2f6;
+  --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1419; --surface: #161d25; --fg: #e6ebf0; --muted: #98a4b1;
+    --line: #26303b; --accent: #82b8e0; --accent-soft: #1b2a37; --code-bg: #1b232c;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1419; --surface: #161d25; --fg: #e6ebf0; --muted: #98a4b1;
+  --line: #26303b; --accent: #82b8e0; --accent-soft: #1b2a37; --code-bg: #1b232c;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { color-scheme: light; }
+body { margin: 0; }
+img { max-width: 100%; }
+body {
+  background: var(--bg); color: var(--fg);
+  font: 400 16px/1.6 var(--body);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+main { max-width: 760px; margin: 0 auto; padding-block: 56px 72px; display: grid; gap: 56px; }
+a { color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0; }
+h1 { font-size: clamp(2.4rem, 7vw, 3.4rem); font-weight: 700; line-height: 1.05; letter-spacing: -0.02em; }
+h2 {
+  font: 500 0.78rem/1 var(--body); text-transform: uppercase; letter-spacing: 0.12em;
+  color: var(--muted); padding-bottom: 12px; border-bottom: 1px solid var(--line);
+}
+h3 { font-size: 1.3rem; font-weight: 700; line-height: 1.25; }
+p { margin: 0; }
+section { display: grid; gap: 20px; }
+
+/* Header */
+.intro { display: grid; gap: 18px; }
+.role { font: 500 1.05rem/1.4 var(--body); color: var(--accent); }
+.lede { font-size: 1.12rem; color: var(--fg); max-width: 62ch; }
+.contact { display: flex; flex-wrap: wrap; gap: 8px 22px; font-size: 0.95rem; color: var(--muted); }
+.contact a { font-weight: 500; }
+.email { font-family: var(--mono); font-size: 0.88rem; color: var(--fg); user-select: all; }
+.facts { display: flex; flex-wrap: wrap; gap: 10px; margin: 6px 0 0; padding: 0; list-style: none; }
+.facts li {
+  font: 500 0.85rem/1 var(--mono); padding: 8px 12px; border-radius: 999px;
+  background: var(--accent-soft); color: var(--fg);
+}
+
+/* Project entries */
+.work { display: grid; gap: 14px; }
+.project {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 10px;
+  padding: 22px 22px 20px; display: grid; gap: 12px; min-width: 0;
+}
+.project-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 6px 16px; }
+.meta { font-size: 0.9rem; color: var(--muted); }
+.project ul { margin: 0; padding-left: 1.1em; display: grid; gap: 6px; }
+.project li::marker { color: var(--accent); }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tags span {
+  font: 400 0.78rem/1 var(--mono); color: var(--muted);
+  border: 1px solid var(--line); border-radius: 4px; padding: 5px 7px;
+}
+.links { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 0.93rem; font-weight: 500; }
+.note { font-size: 0.88rem; color: var(--muted); font-style: italic; }
+
+/* Install snippet */
+.snippet {
+  display: flex; align-items: center; gap: 10px; min-width: 0;
+  background: var(--code-bg); border-radius: 6px; padding: 10px 10px 10px 14px;
+}
+.snippet code { font: 400 0.82rem/1.5 var(--mono); overflow-x: auto; white-space: nowrap; flex: 1; min-width: 0; }
+.snippet button {
+  flex: none; font: 500 0.8rem/1 var(--body); color: var(--accent); cursor: pointer;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 5px; padding: 7px 10px;
+}
+.snippet button:hover { border-color: var(--accent); }
+
+/* Timeline */
+.timeline { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+.timeline li {
+  display: grid; grid-template-columns: 9.5rem 1fr; gap: 4px 20px;
+  padding: 14px 0; border-bottom: 1px solid var(--line);
+}
+.timeline li:last-child { border-bottom: 0; }
+.when { font: 400 0.85rem/1.6 var(--mono); color: var(--muted); font-variant-numeric: tabular-nums; }
+.what strong { font-weight: 600; }
+.what p { color: var(--muted); font-size: 0.95rem; }
+
+.skills { display: grid; gap: 10px; margin: 0; }
+.skills div { display: grid; grid-template-columns: 7.5rem 1fr; gap: 16px; }
+.skills dt { font-weight: 600; }
+.skills dd { margin: 0; color: var(--muted); }
+
+footer { font-size: 0.85rem; color: var(--muted); border-top: 1px solid var(--line); padding-top: 18px; }
+
+@media (max-width: 560px) {
+  main { padding-block: 36px 56px; gap: 44px; }
+  .project { padding: 18px 16px; }
+  .timeline li, .skills div { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .snippet button { transition: border-color .15s; }
+}
+</style>
+</head>
+<body>
+
+<main>
+  <header class="intro">
+    <h1>Reem Mousa</h1>
+    <p class="role">Senior Android Developer · Cairo, Egypt</p>
+    <p class="lede">I build native Android apps in Kotlin and own them end to end, from architecture to Play Store release. My work centers on audio streaming, background transfer and talking to hardware over USB and Bluetooth.</p>
+    <ul class="facts" aria-label="At a glance">
+      <li>7+ years Android</li>
+      <li>Kotlin · Java</li>
+      <li>Media3 · Android Auto</li>
+      <li>WorkManager · Room</li>
+      <li>USB PTP · BLE</li>
+    </ul>
+    <div class="contact">
+      <span class="email">reemhazzaamosa95@gmail.com</span>
+      <a href="https://www.linkedin.com/in/reem-hazzaa95/">LinkedIn</a>
+      <a href="https://github.com/ReemMousaES">GitHub</a>
+    </div>
+  </header>
+
+  <section aria-labelledby="apps">
+    <h2 id="apps">Shipped apps</h2>
+    <div class="work">
+      <article class="project">
+        <div class="project-head">
+          <h3>Anaphora</h3>
+          <span class="meta">Audio streaming · sole Android engineer</span>
+        </div>
+        <ul>
+          <li>Built from scratch: a full music-style player with offline mode and a download manager that runs parallel downloads with pause and resume.</li>
+          <li>Moved playback onto Media3 MediaController and shipped Android Auto with a browse tree, voice search and queue resume.</li>
+          <li>284 merged pull requests through v4.2.0, backed by more than 1,800 unit tests. Runs on AGP 9, Kotlin 2.4 and SDK 37.</li>
+        </ul>
+        <div class="tags"><span>Media3</span><span>Android Auto</span><span>WorkManager</span><span>Room</span><span>Hilt</span><span>Auth0</span></div>
+        <div class="links"><a href="https://play.google.com/store/apps/details?id=com.anaphoraradio.anaphorax">Google Play</a></div>
+      </article>
+
+      <article class="project">
+        <div class="project-head">
+          <h3>PhotoFlare</h3>
+          <span class="meta">DSLR event photography · lead developer</span>
+        </div>
+        <ul>
+          <li>Connects to a DSLR over USB and pulls photos during live events. I rebuilt the image pipeline on coroutine channels so 10+ FPS bursts run without native crashes or low-memory kills.</li>
+          <li>Replaced long-running services with a Room and WorkManager upload queue, then split the camera and upload layers into reusable libraries (below).</li>
+        </ul>
+        <div class="tags"><span>USB PTP</span><span>Coroutines</span><span>Channels</span><span>WorkManager</span><span>Room</span></div>
+        <p class="note">Distributed privately to event operators, so there is no public store listing.</p>
+      </article>
+
+      <article class="project">
+        <div class="project-head">
+          <h3>New Giza OneCommunity and Sales</h3>
+          <span class="meta">Two Salesforce apps · since Nov 2025</span>
+        </div>
+        <ul>
+          <li>Residents and buyers use them for payments, bookings, guest invitations and QR gate access.</li>
+          <li>Fixed the login and device verification flows on the Salesforce Mobile SDK.</li>
+        </ul>
+        <div class="tags"><span>Salesforce Mobile SDK</span><span>Kotlin</span><span>QR</span></div>
+        <div class="links">
+          <a href="https://play.google.com/store/apps/details?id=com.newgiza.onecommunity">OneCommunity on Google Play</a>
+          <a href="https://play.google.com/store/apps/details?id=com.newgiza.NGSC">Sales on Google Play</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section aria-labelledby="oss">
+    <h2 id="oss">Open-source libraries</h2>
+    <div class="work">
+      <article class="project">
+        <div class="project-head">
+          <h3>esUpload</h3>
+          <span class="meta">v1.3.0 · JitPack</span>
+        </div>
+        <p>Queues file uploads and sends them one at a time in the background with WorkManager. Uploads survive app restarts, retry on failure and report progress. Covered by 33 unit tests.</p>
+        <div class="snippet">
+          <code id="install">implementation("com.github.ReemMousaES:esUpload:1.3.0")</code>
+          <button type="button" id="copy-install">Copy</button>
+        </div>
+        <div class="tags"><span>WorkManager</span><span>Room</span><span>OkHttp</span><span>Hilt</span><span>API 24+</span></div>
+        <div class="links"><a href="https://github.com/ReemMousaES/esUpload">View on GitHub</a></div>
+      </article>
+
+      <article class="project">
+        <div class="project-head">
+          <h3>es-ptp-camera</h3>
+          <span class="meta">Android library</span>
+        </div>
+        <p>Controls DSLR cameras from Android over USB using the Picture Transfer Protocol: connect, trigger and download photos. Extracted from PhotoFlare.</p>
+        <div class="tags"><span>USB Host</span><span>PTP</span><span>Kotlin</span></div>
+        <div class="links"><a href="https://github.com/ReemMousaES/es-ptp-camera">View on GitHub</a></div>
+      </article>
+    </div>
+  </section>
+
+  <section aria-labelledby="writing">
+    <h2 id="writing">Writing</h2>
+    <div class="work">
+      <article class="project">
+        <ul>
+          <li><strong>Adding Android Auto to an audio player.</strong> What it took to bring Anaphora to the car.</li>
+          <li><strong>AI agents for the Android 15 16 KB page-size migration.</strong> How agents cut the migration time by about 94%.</li>
+        </ul>
+        <div class="links"><a href="https://www.linkedin.com/in/reem-hazzaa95/recent-activity/articles/">Read on LinkedIn</a></div>
+      </article>
+    </div>
+  </section>
+
+  <section aria-labelledby="history">
+    <h2 id="history">Experience</h2>
+    <ol class="timeline">
+      <li><span class="when">2023 – now</span><div class="what"><strong>Extreme Solution</strong>, Senior Android Developer<p>Anaphora, PhotoFlare, New Giza</p></div></li>
+      <li><span class="when">2022</span><div class="what"><strong>UnionCoop</strong>, Android Developer<p>E-commerce app with 100k+ users</p></div></li>
+      <li><span class="when">2021 – 2022</span><div class="what"><strong>Expleo Group</strong> for BMW, Android Developer<p>Custom AOSP infotainment build with CarPlay and Android Auto, BLE pairing</p></div></li>
+      <li><span class="when">2019 – 2021</span><div class="what"><strong>Epic Systems</strong>, Android Developer<p>11 apps in Java and Kotlin, 4 on Google Play</p></div></li>
+    </ol>
+  </section>
+
+  <section aria-labelledby="skills">
+    <h2 id="skills">Skills</h2>
+    <dl class="skills">
+      <div><dt>Core</dt><dd>Kotlin, Java, Coroutines, Flow, MVVM, Clean Architecture, Hilt, Jetpack Compose</dd></div>
+      <div><dt>Android</dt><dd>Media3, Android Auto, WorkManager, Room, Paging 3, DataStore, Retrofit, Material 3</dd></div>
+      <div><dt>Quality</dt><dd>JUnit, MockK, Turbine, Espresso, GitHub Actions, Firebase Crashlytics</dd></div>
+      <div><dt>Integrations</dt><dd>Salesforce Mobile SDK, Auth0, USB PTP, BLE, AOSP</dd></div>
+    </dl>
+  </section>
+
+  <footer>B.Sc. Computer Engineering, Helwan University · Arabic (native), English (professional)</footer>
+</main>
+
+<script>
+document.getElementById('copy-install').addEventListener('click', function () {
+  var btn = this, code = document.getElementById('install');
+  function selectIt() {
+    var r = document.createRange(); r.selectNodeContents(code);
+    var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+    btn.textContent = 'Selected';
+  }
+  try {
+    navigator.clipboard.writeText(code.textContent).then(function () { btn.textContent = 'Copied'; }, selectIt);
+  } catch (e) { selectIt(); }
+  setTimeout(function () { btn.textContent = 'Copy'; }, 2000);
+});
+</script>
+
+</body>
+</html>
